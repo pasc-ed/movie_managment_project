@@ -62,12 +62,6 @@ INSERT INTO movies_tbl VALUES
 (
     null,
     "Wonder Woman",
-    1997,
-    (SELECT id FROM directors_tbl WHERE name like "James Cameron")
-),
-(
-    null,
-    "Wonder Woman",
     2017,
     (SELECT id FROM directors_tbl WHERE name like "Patty Jenkins")
 ),
@@ -164,3 +158,60 @@ FROM movies_tbl
     JOIN movie_actors_tbl ON movies_tbl.id = movie_actors_tbl.movie_id
     JOIN main_actors_tbl ON main_actors_tbl.id = movie_actors_tbl.main_actor_id
 WHERE movies_tbl.title LIKE "Avatar";
+
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "The Dark Knight"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Christian Bale")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Inception"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Leonardo DiCaprio")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Eternals"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Angelina Jolie")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Eternals"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Gemma Chan")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Titanic"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Leonardo DiCaprio")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Terminator"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Arnold Schwarzenegger")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Aliens"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Sigourney Weaver")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Avatar"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Sigourney Weaver")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Wonder Woman"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Gal Gadot")
+);
+INSERT INTO movie_actors_tbl VALUES(
+    (SELECT id FROM movies_tbl WHERE title LIKE "Cleopatra"),
+    (SELECT id FROM main_actors_tbl WHERE name LIKE "Gal Gadot")
+);
+
+SELECT COUNT(*)
+FROM movies_tbl
+WHERE title LIKE "T%";
+
+SELECT *
+FROM movies_tbl
+ORDER BY release_year ASC;
+
+SELECT *
+FROM movies_tbl
+ORDER BY release_year DESC;
+
+SELECT title, release_year
+FROM movies_tbl;
+
