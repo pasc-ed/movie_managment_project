@@ -1,3 +1,1 @@
-Flask
-pathlib
-flask_mysqldb
+Flask==2.2.2
