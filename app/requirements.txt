@@ -1,3 +1,2 @@
 Flask
-json
 flask_mysqldb
