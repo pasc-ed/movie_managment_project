@@ -1,1 +1,2 @@
 Flask>=2.0.2
+flask-mysqldb==1.0.1
