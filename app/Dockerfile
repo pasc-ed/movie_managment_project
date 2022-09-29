@@ -8,7 +8,7 @@ COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
-RUN pip3x install -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY ./movie_app/ .
 
