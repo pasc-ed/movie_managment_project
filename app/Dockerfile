@@ -1,6 +1,9 @@
 FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine
 
 RUN apk --update add bash nano
+RUN apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add --no-cache mariadb-dev\
+    && apk del build-deps
 ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
 
