@@ -1,4 +1,4 @@
-DROP DATABASE movie_db IF EXISTS;
+DROP DATABASE IF EXISTS movie_db;
 
 # Create a new database
 CREATE DATABASE movie_db;
