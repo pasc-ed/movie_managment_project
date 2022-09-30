@@ -1,7 +1,7 @@
 import json
 
 from flask import Flask, render_template
-from flask_mysqldb import MySQL
+from flask_mysql_connector import MySQL
 from flask import request
 
 app = Flask("MovieApp")
@@ -9,7 +9,8 @@ app = Flask("MovieApp")
 app.config["MYSQL_HOST"] = "127.0.0.1"
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "my-secret-pw" # TODO enter your supersecret password
-app.config["MYSQL_DB"] = "movie_db"
+app.config["MYSQL_DATABASE"] = "movie_db"
+app.config["MYSQL_AUTH_PLUGIN"] = "mysql_native_password"
 
 mysql = MySQL(app)
 

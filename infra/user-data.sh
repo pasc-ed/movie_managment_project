@@ -21,5 +21,7 @@ mkdir ~/database
 docker run --name movie-db-mysql -p 3306:3306 -v ~/database:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest --default-authentication-plugin=mysql_native_password
 
 # DEPLOY OUR DATABASE INSIDE THE MYSQL CONTAINER
+mysql -h 127.0.0.1 -u -pmy-secret-pw < ../database/create_movie_database.sql
+
 # RUN MY CONTAINER - FLASK APP RUNNING
 docker run -d -p 80:80 --name=movie-mgmt -v $PWD/movie_app:/app movie-mgmt
