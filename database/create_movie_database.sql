@@ -10,14 +10,14 @@ CREATE TABLE directors_tbl(
     name varchar(255),
     year_of_birth int,
     PRIMARY KEY (id)
-)
+);
 
 # Add a new entry to the table
 INSERT INTO directors_tbl VALUES(
     null,
     "James Cameron",
     1954
-)
+);
 
 # Create our Movie table
 CREATE TABLE movies_tbl(
@@ -90,8 +90,7 @@ INSERT INTO movies_tbl VALUES
     "The Dark Knight",
     2008,
     (SELECT id FROM directors_tbl WHERE name like "Christopher Nolan")
-)
-;
+);
 
 # Create table for actors
 CREATE TABLE main_actors_tbl(
