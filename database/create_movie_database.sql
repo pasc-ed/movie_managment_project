@@ -1,12 +1,12 @@
 DROP DATABASE IF EXISTS movie_db;
 
--- Create a new database
+# Create a new database
 CREATE DATABASE movie_db;
 
--- Use our new database
-\c movie_db;
+# Use our new database
+USE movie_db;
 
--- Create table directors
+# Create table directors
 CREATE TABLE directors_tbl(
     id int NOT NULL AUTO_INCREMENT,
     name varchar(255),
@@ -14,14 +14,14 @@ CREATE TABLE directors_tbl(
     PRIMARY KEY (id)
 );
 
--- Add a new entry to the table
+# Add a new entry to the table
 INSERT INTO directors_tbl VALUES(
     null,
     "James Cameron",
     1954
 );
 
--- Create our Movie table
+# Create our Movie table
 CREATE TABLE movies_tbl(
     id int NOT NULL AUTO_INCREMENT,
     title varchar(255),
@@ -31,7 +31,7 @@ CREATE TABLE movies_tbl(
     FOREIGN KEY (director_id) REFERENCES directors_tbl(id)
 );
 
--- Add new movie in Movie table
+# Add new movie in Movie table
 INSERT INTO movies_tbl VALUES(
     null,
     "Titanic",
@@ -94,7 +94,7 @@ INSERT INTO movies_tbl VALUES
     (SELECT id FROM directors_tbl WHERE name like "Christopher Nolan")
 );
 
--- Create table for actors
+# Create table for actors
 CREATE TABLE main_actors_tbl(
     id int NOT NULL AUTO_INCREMENT,
     name varchar(255),
@@ -113,7 +113,7 @@ INSERT INTO main_actors_tbl VALUES(null, "Zoe Saldaña",           1978, "F");
 INSERT INTO main_actors_tbl VALUES(null, "Gemma Chan",            1982, "F");
 
 
--- Create your Movie-Actors table
+# Create your Movie-Actors table
 CREATE TABLE movie_actors_tbl(
     movie_id int NOT NULL,
     main_actor_id int NOT NULL,

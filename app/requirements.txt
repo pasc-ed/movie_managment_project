@@ -1,2 +1,4 @@
 Flask==2.2.2
-psycopg2-binary
+Flask==2.2.2
+Flask-MySQLdb==1.0.1
+mysqlclient==2.1.1
