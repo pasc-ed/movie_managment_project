@@ -4,7 +4,7 @@ DROP DATABASE IF EXISTS movie_db;
 CREATE DATABASE movie_db;
 
 -- Use our new database
-USE movie_db;
+\c movie_db;
 
 -- Create table directors
 CREATE TABLE directors_tbl(
