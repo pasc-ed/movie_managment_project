@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# INSTALL GIT AND POSTGRE
-sudo yum install git postgresql  -y
+# INSTALL GIT AND MYSQL
+apt-get install git mysql-client -y
 # INSTALL DOCKER
-sudo amazon-linux-extras install docker -y
-
-# START DOCKER SERVICE
-sudo service docker start
-sudo usermod -a -G docker ec2-user
+apt-get install ca-certificates curl gnupg lsb-release
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+apt-get update
+apt-get install docker.io -y
 
 # CLONE MY MOVIE-MANGEMENT-PROJECT REPO
 git clone --branch demo https://github.com/pasc-ed/movie_managment_project.git
@@ -16,18 +16,12 @@ git clone --branch demo https://github.com/pasc-ed/movie_managment_project.git
 cd movie_managment_project/app
 docker build -t movie-mgmt .
 
-# RUN POSTGRE CONTAINER
+# RUN MYSQL CONTAINER
 mkdir ~/database
-docker run -d \
-	--name postgres-movie-db \
-	-e POSTGRES_PASSWORD=my-secret-pw \
-	-e PGDATA=/var/lib/postgresql/data/pgdata \
-	-v ~/database:/var/lib/postgresql/data \
-    -p 5432:5432 \
-	postgres
+docker run --name movie-db-mysql -p 3306:3306 -v ~/database:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest --default-authentication-plugin=mysql_native_password
 
-# DEPLOY OUR DATABASE INSIDE THE POSTGRE CONTAINER
-mysql -h 127.0.0.1 -u root -pmy-secret-pw < ../database/create_movie_database.sql
+# DEPLOY OUR DATABASE INSIDE THE MYSQL CONTAINER
+mysql -h 127.0.0.1 -u -pmy-secret-pw < ../database/create_movie_database.sql
 
 # RUN MY CONTAINER - FLASK APP RUNNING
 docker run -d -p 80:80 --name=movie-mgmt -v $PWD/movie_app:/app movie-mgmt
