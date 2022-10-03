@@ -6,7 +6,7 @@ from flask import request
 
 app = Flask("MovieApp")
 
-app.config["MYSQL_HOST"] = "127.0.0.1"
+app.config["MYSQL_HOST"] = "DB_IP"
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "my-secret-pw" # TODO enter your supersecret password
 app.config["MYSQL_DB"] = "movie_db"

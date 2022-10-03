@@ -2,6 +2,7 @@
 
 # INSTALL GIT AND MYSQL
 apt-get install git mysql-client -y
+
 # INSTALL DOCKER
 apt-get install ca-certificates curl gnupg lsb-release
 mkdir -p /etc/apt/keyrings
@@ -18,10 +19,14 @@ docker build -t movie-mgmt .
 
 # RUN MYSQL CONTAINER
 mkdir ~/database
-docker run --name movie-db-mysql -p 3306:3306 -v ~/database:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest --default-authentication-plugin=mysql_native_password
+docker run --name movie-db-mysql -p 3306:3306 -v ~/database:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
+#--default-authentication-plugin=mysql_native_password
 
 # DEPLOY OUR DATABASE INSIDE THE MYSQL CONTAINER
-mysql -h 127.0.0.1 -u -pmy-secret-pw < ../database/create_movie_database.sql
+mysql -h 127.0.0.1 -u root -pmy-secret-pw < ../database/create_movie_database.sql
+
+DATABASE_IP=`docker inspect movie-db-mysql | grep -e '"IPAddress"' -m 1 | awk -F '"' '{print $4}'`
+sed -i "s/DB_IP/$DATABASE_IP/g" movie_app/main.py
 
 # RUN MY CONTAINER - FLASK APP RUNNING
 docker run -d -p 80:80 --name=movie-mgmt -v $PWD/movie_app:/app movie-mgmt
