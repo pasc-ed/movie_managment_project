@@ -27,11 +27,12 @@ docker build -t movie-mgmt .
 # RUN MYSQL CONTAINER
 mkdir ~/database
 docker run --name movie-db-mysql -p 3306:3306 -v ~/database:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
-# --default-authentication-plugin=mysql_native_password
+
+# wait 5 seconds for DB to come online
+sleep 5
 
 # DEPLOY OUR DATABASE INSIDE THE MYSQL CONTAINER
 mysql -h 127.0.0.1 -u root -pmy-secret-pw < ~/movie_managment_project/database/create_movie_database.sql
-
 
 container_ip=`docker inspect movie-db-mysql | grep -e '"IPAddress"' -m 1|awk -F '"' '{print $4}'`
 sed -i "s/DOCKER_CONTAINER_IP_PLACEHOLDER/${container_ip}/g" ~/movie_managment_project/app/movie_app/main.py
