@@ -1,7 +1,15 @@
 # ASSIGN VALUE TO VARIABLES
 vpc_name             = "Talent-Academy-VPC"
 public_subnet_a_name = "Public-A"
+private_subnet_a_name = "Private-A"
+private_subnet_b_name = "Private-B"
 amzn_ami_name        = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
 amzn_ami_owner       = "099720109477"
 movie_app_ec2_type   = "t3.medium"
-keypair_name = "talent-academy-ec2"
+keypair_name         = "talent-academy-ec2"
+db_storage           = 10
+db_name              = "movie_db"
+db_engine            = "mysql"
+db_engine_version    = "8.0.30"
+db_instance_class    = "db.t2.small"
+db_username          = "root"
