@@ -25,9 +25,10 @@ cd ~/movie_managment_project/app
 docker build -t movie-mgmt .
 
 # DEPLOY OUR DATABASE INSIDE THE RDS DATABASE
-mysql -h ${db_endpoint} -u root -pmy-secret-pw < ~/movie_managment_project/database/create_movie_database.sql
+mysql -h ${db_endpoint} -u root -p${db_password} < ~/movie_managment_project/database/create_movie_database.sql
 
-sed -i "s/DOCKER_CONTAINER_IP_PLACEHOLDER/${db_endpoint}/g" ~/movie_managment_project/app/movie_app/main.py
+sed -i "s/ENDPOINT_PLACEHOLDER/${db_endpoint}/g" ~/movie_managment_project/app/movie_app/main.py
+sed -i "s/PASSWORD_PLACEHOLDER/${db_endpoint}/g" ~/movie_managment_project/app/movie_app/main.py
 
 # RUN MY CONTAINER - FLASK APP RUNNING
 docker run -d -p 80:80 --name=movie-mgmt -v ~/movie_managment_project/app/movie_app:/app movie-mgmt

@@ -6,9 +6,9 @@ from flask import request
 
 app = Flask("MovieApp")
 
-app.config["MYSQL_HOST"] = "DOCKER_CONTAINER_IP_PLACEHOLDER"
+app.config["MYSQL_HOST"] = "ENDPOINT_PLACEHOLDER"
 app.config["MYSQL_USER"] = "root"
-app.config["MYSQL_PASSWORD"] = "my-secret-pw" # TODO enter your supersecret password
+app.config["MYSQL_PASSWORD"] = "PASSWORD_PLACEHOLDER"
 app.config["MYSQL_DB"] = "movie_db"
 
 mysql = MySQL(app)
