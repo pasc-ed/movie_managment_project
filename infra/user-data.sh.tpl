@@ -28,7 +28,7 @@ docker build -t movie-mgmt .
 mysql -h ${db_endpoint} -u root -p${db_password} < ~/movie_managment_project/database/create_movie_database.sql
 
 sed -i "s/ENDPOINT_PLACEHOLDER/${db_endpoint}/g" ~/movie_managment_project/app/movie_app/main.py
-sed -i "s/PASSWORD_PLACEHOLDER/${db_endpoint}/g" ~/movie_managment_project/app/movie_app/main.py
+sed -i "s/PASSWORD_PLACEHOLDER/${db_password}/g" ~/movie_managment_project/app/movie_app/main.py
 
 # RUN MY CONTAINER - FLASK APP RUNNING
 docker run -d -p 80:80 --name=movie-mgmt -v ~/movie_managment_project/app/movie_app:/app movie-mgmt
